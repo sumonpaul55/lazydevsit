@@ -10,6 +10,6 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<MainLayout />} />
       </Routes>
-    </BrowserRouter>,
-  </StrictMode>,
+    </BrowserRouter>
+  </StrictMode>
 )
