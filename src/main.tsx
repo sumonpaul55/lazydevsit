@@ -15,6 +15,6 @@ createRoot(document.getElementById('root')!).render(
         <Route path="about" element={<Aboutus />} />
         <Route path="contact" element={<Contact />} />
       </Routes>
-    </BrowserRouter>,
-  </StrictMode>,
+    </BrowserRouter>
+  </StrictMode>
 )

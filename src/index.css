@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+:root {
+  
+  --color-primary: 18 23 37; /*(hex #121725 → rgb(18, 23, 37))*/
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+
+@theme {
+  --color-primary: rgb(var(--color-primary));
+  --font-sans: var(--font-sans);
+}
+
+
+body {
+  font-family: var(--font-sans);
+}
