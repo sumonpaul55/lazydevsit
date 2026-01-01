@@ -1,11 +1,28 @@
-import type { FormEvent } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState, } from "react";
 import { contactMethods } from "../utils/contact/ContactData";
 
 export default function ContactPage() {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    console.log("Form submitted");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form Values:", formData);
+  };
+
+
+
   return (
     <div className="min-h-screen  text-white">
       {/* Hero Header */}
@@ -68,12 +85,14 @@ export default function ContactPage() {
         <form onSubmit={handleSubmit} className="space-y-4 ">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
               type="text"
               placeholder="Full Name"
               className="w-full bg-white text-black px-5 py-4 rounded-sm focus:ring-2 focus:ring-purple-500 outline-none transition-all"
               required
             />
             <input
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
               type="email"
               placeholder="Your Email"
               className="w-full bg-white text-black px-5 py-4 rounded-sm focus:ring-2 focus:ring-purple-500 outline-none transition-all"
@@ -81,6 +100,7 @@ export default function ContactPage() {
             />
           </div>
           <textarea
+            onChange={(e: any) => handleChange(e)}
             placeholder="Message"
             rows={5}
             className="w-full bg-white text-black px-5 py-4 rounded-sm focus:ring-2 focus:ring-purple-500 outline-none transition-all resize-none"

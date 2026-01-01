@@ -123,9 +123,9 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
-import { footerData } from "../../utils/footer/footerData";
-import type { FooterSection } from "../../utils/types/footer.type";
 import { Link } from "react-router";
+import { footerData } from "../utils/footer/footerData";
+import type { FooterSection } from "../utils/types/footer.type";
 
 export default function Footer() {
   return (
