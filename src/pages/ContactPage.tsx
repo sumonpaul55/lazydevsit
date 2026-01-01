@@ -12,7 +12,7 @@ export default function ContactPage() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-
+    console.log(name);
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -85,6 +85,7 @@ export default function ContactPage() {
         <form onSubmit={handleSubmit} className="space-y-4 ">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
+              name="name"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
               type="text"
               placeholder="Full Name"
@@ -92,6 +93,7 @@ export default function ContactPage() {
               required
             />
             <input
+              name="email"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
               type="email"
               placeholder="Your Email"
@@ -100,6 +102,7 @@ export default function ContactPage() {
             />
           </div>
           <textarea
+            name="message"
             onChange={(e: any) => handleChange(e)}
             placeholder="Message"
             rows={5}
