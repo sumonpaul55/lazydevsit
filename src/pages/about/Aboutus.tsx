@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 const services = [
@@ -15,7 +16,7 @@ const services = [
   "Portfolio Websites",
   "Agency Websites",
   "React.js Development",
-  "Next.js Development",
+  "Next.js Development", 
   "Node.js Development",
   "React Native Development",
   "Mobile Applications",
@@ -42,63 +43,76 @@ const team = [
 
 
 export default function AboutUs() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".hero-title", {
-        y: 80,
-        opacity: 0,
+  useGSAP(() => {
+    gsap.fromTo(".hero-title",
+      { y: 80, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
         duration: 1,
         ease: "power4.out",
-      });
+      }
+    );
 
-      gsap.from(".hero-text", {
-        y: 40,
-        opacity: 0,
+    gsap.fromTo(".hero-text",
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
         duration: 1,
         delay: 0.3,
         ease: "power3.out",
-      });
+      }
+    );
 
-      gsap.from(".service-card", {
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: "top 80%",
-        },
-      });
-
-      gsap.from(".team-card", {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: teamRef.current,
-          start: "top 80%",
-        },
-      });
+    const serviceCards = gsap.utils.toArray(".service-card", containerRef.current);
+    serviceCards.forEach((card: any) => {
+      gsap.fromTo(card,
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+        }
+      );
     });
 
-    return () => ctx.revert();
-  }, []);
+    const teamCards = gsap.utils.toArray(".team-card", containerRef.current);
+    teamCards.forEach((card: any) => {
+      gsap.fromTo(card,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+        }
+      );
+    });
+  }, { scope: containerRef });
 
   return (
-    <section className="bg-[#050816] text-white overflow-hidden">
+    <section ref={containerRef} className="bg-[#050816] text-white overflow-hidden">
       {/* HERO SECTION */}
       <div
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center px-6 lg:px-20"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-transparent to-cyan-500/20 blur-3xl" />
+        <div className="absolute inset-0 bg-linear-to-br from-purple-600/20 via-transparent to-cyan-500/20 blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
           {/* LEFT CONTENT */}
@@ -109,7 +123,7 @@ export default function AboutUs() {
 
             <h1 className="hero-title text-5xl md:text-6xl font-black leading-tight">
               Building Powerful
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+              <span className="block text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-500">
                 Digital Solutions
               </span>
             </h1>
@@ -122,7 +136,7 @@ export default function AboutUs() {
             </p>
 
             <div className="hero-text flex flex-wrap gap-4 mt-10">
-              <button className="px-7 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 font-semibold hover:scale-105 transition-all duration-300">
+              <button className="px-7 py-4 rounded-2xl bg-linear-to-r from-cyan-500 to-blue-600 font-semibold hover:scale-105 transition-all duration-300">
                 Start Your Project
               </button>
 
@@ -134,8 +148,8 @@ export default function AboutUs() {
 
           {/* RIGHT CARD */}
           <div className="relative">
-            <div className="absolute -top-10 -left-10 w-40 h-40 bg-cyan-500/20 rounded-full blur-3xl" />
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl" />
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl">
               <div className="grid grid-cols-2 gap-6">
@@ -188,10 +202,10 @@ export default function AboutUs() {
                 key={index}
                 className="service-card group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:-translate-y-2 transition-all duration-500"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition duration-500" />
+                <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none" />
 
                 <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center text-2xl font-bold">
+                  <div className="w-14 h-14 rounded-2xl bg-linear-to-r from-cyan-500 to-blue-600 flex items-center justify-center text-2xl font-bold">
                     {index + 1}
                   </div>
 
@@ -211,7 +225,7 @@ export default function AboutUs() {
       {/* TEAM SECTION */}
       <div
         ref={teamRef}
-        className="px-6 lg:px-20 py-24 bg-white/[0.02]"
+        className="px-6 lg:px-20 py-24 bg-white/5"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -235,7 +249,7 @@ export default function AboutUs() {
                 key={index}
                 className="team-card relative rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl hover:-translate-y-2 transition-all duration-500"
               >
-                <div className="w-24 h-24 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center text-3xl font-black">
+                <div className="w-24 h-24 rounded-full bg-linear-to-r from-cyan-500 to-purple-500 flex items-center justify-center text-3xl font-black">
                   {member.name.charAt(0)}
                 </div>
 
@@ -255,7 +269,7 @@ export default function AboutUs() {
 
       {/* CTA */}
       <div className="px-6 lg:px-20 py-24">
-        <div className="max-w-5xl mx-auto text-center rounded-[40px] border border-white/10 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 backdrop-blur-xl p-12">
+        <div className="max-w-5xl mx-auto text-center rounded-[40px] border border-white/10 bg-linear-to-r from-cyan-500/10 to-purple-500/10 backdrop-blur-xl p-12">
           <h2 className="text-4xl md:text-5xl font-black leading-tight">
             Let’s Build Something Amazing Together
           </h2>
@@ -266,7 +280,7 @@ export default function AboutUs() {
             into reality.
           </p>
 
-          <button className="mt-10 px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-600 font-bold hover:scale-105 transition-all duration-300">
+          <button className="mt-10 px-8 py-4 rounded-2xl bg-linear-to-r from-cyan-500 to-purple-600 font-bold hover:scale-105 transition-all duration-300">
             Contact Us
           </button>
         </div>
