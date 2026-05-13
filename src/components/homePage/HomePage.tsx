@@ -1,3 +1,4 @@
+import FeaturedProject from "./FeaturedProject";
 import ProcessWeFollow from "./ProcessWeFollow";
 import Service from "./Service";
 import WhyPartner from "./WhyPartner";
@@ -8,6 +9,7 @@ export default function HomePage() {
       <Service />
       <ProcessWeFollow />
       <WhyPartner />
+      <FeaturedProject />
     </div>
   );
 }

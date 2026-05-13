@@ -109,7 +109,7 @@ export default function WhyPartner() {
               <span className="text-purple-500">LazyDevs?</span>
             </h2>
 
-            <p className="text-lg text-gray-400 max-w-lg mb-12">
+            <p className="text-lg text-gray-400 mb-12">
               At LazyDevs IT Lab, we don't just write code; we build
               relationships and delivering value. Our commitment to quality and
               innovation sets us apart in the crowded digital landscape.
@@ -147,7 +147,7 @@ export default function WhyPartner() {
                 }}
                 className={`rounded-3xl p-8 flex flex-col justify-center items-center text-center h-full transition-all duration-300 hover:scale-105 border border-zinc-800 text-white ${
                   index === 1 || index === 2
-                    ? "bg-purple-500 shadow-xl shadow-purple-500/30"
+                    ? "bg-purple-700 shadow-xl shadow-purple-500/30"
                     : "bg-zinc-900"
                 }`}
               >
