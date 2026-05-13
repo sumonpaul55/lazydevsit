@@ -33,7 +33,7 @@ export default function Service() {
   };
   return (
     <section ref={sectionRef} className="py-24 px-6 text-white">
-      <div className="max-w-7xl mx-auto">
+      <div className="container mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
           <p className="text-purple-400 text-sm tracking-[3px] uppercase font-medium mb-4">

@@ -118,7 +118,7 @@ export default function ProcessWeFollow() {
             We Don&apos;t Just Do It,
             <br />
             We Become Your{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-pink-500">
               Growth Partner!
             </span>
           </h2>

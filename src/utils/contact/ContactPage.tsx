@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { contactMethods } from "../utils/contact/ContactData";
+import { contactMethods } from "./ContactData";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
