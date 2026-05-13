@@ -3,6 +3,9 @@
 @theme {
   --color-primary: #080018;
   --font-sans: var(--font-sans);
+  --card-bg: rgba(15, 23, 42, 0.7);
+  --muted-text: #94a3b8;
+  --border-color: rgba(148, 163, 184, 0.15);
 }
 
 body {
@@ -17,4 +20,13 @@ body {
   align-items: center;
   flex-direction: column;
   gap: 1rem;
+}
+.glass {
+  background: var(--card-bg);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid var(--border-color);
 }
