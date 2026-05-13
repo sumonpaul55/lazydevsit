@@ -16,7 +16,7 @@ const services = [
   "Portfolio Websites",
   "Agency Websites",
   "React.js Development",
-  "Next.js Development", 
+  "Next.js Development",
   "Node.js Development",
   "React Native Development",
   "Mobile Applications",
@@ -200,8 +200,7 @@ export default function AboutUs() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="service-card group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:-translate-y-2 transition-all duration-500"
-              >
+                className="service-card group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:-translate-y-2 transition-all duration-500">
                 <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none" />
 
                 <div className="relative z-10">
@@ -221,12 +220,10 @@ export default function AboutUs() {
           </div>
         </div>
       </div>
-
       {/* TEAM SECTION */}
       <div
         ref={teamRef}
-        className="px-6 lg:px-20 py-24 bg-white/5"
-      >
+        className="px-6 lg:px-20 py-24 bg-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-purple-400 font-semibold tracking-widest uppercase">
@@ -252,11 +249,8 @@ export default function AboutUs() {
                 <div className="w-24 h-24 rounded-full bg-linear-to-r from-cyan-500 to-purple-500 flex items-center justify-center text-3xl font-black">
                   {member.name.charAt(0)}
                 </div>
-
                 <h3 className="mt-6 text-2xl font-bold">{member.name}</h3>
-
                 <p className="mt-2 text-cyan-400">{member.role}</p>
-
                 <p className="mt-4 text-gray-400 text-sm leading-relaxed">
                   Passionate about building reliable, scalable, and modern
                   digital products with the latest technologies.
@@ -271,7 +265,7 @@ export default function AboutUs() {
       <div className="px-6 lg:px-20 py-24">
         <div className="max-w-5xl mx-auto text-center rounded-[40px] border border-white/10 bg-linear-to-r from-cyan-500/10 to-purple-500/10 backdrop-blur-xl p-12">
           <h2 className="text-4xl md:text-5xl font-black leading-tight">
-            Let’s Build Something Amazing Together
+            Let&apos;s Build Something Amazing Together
           </h2>
 
           <p className="mt-6 text-gray-300 text-lg max-w-2xl mx-auto">
