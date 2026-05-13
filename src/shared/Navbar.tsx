@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Link } from "react-router";
 import { navLinks } from "../utils/navbar/navbarItem";
@@ -11,7 +12,7 @@ export default function Navbar() {
   const [expandedService, setExpandedService] = useState(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
-  const tl = useRef<gsap.core.Timeline | null>(null);
+  const tl: any = useRef<gsap.core.Timeline | null>(null);
 
   // GSAP Slide Down Animation
   useEffect(() => {
@@ -23,14 +24,14 @@ export default function Navbar() {
       tl.current = gsap.fromTo(
         menuRef.current,
         {
-          y: -30, // Start slightly above
-          opacity: 0.95, // Very subtle opacity for smoothness (optional)
+          y: -30,
+          opacity: 0.95,
         },
         {
           y: 0,
           opacity: 1,
           duration: 0.5,
-          ease: "power3.out", // Very smooth natural dropdown feel
+          ease: "power3.out",
         },
       );
     } else {
