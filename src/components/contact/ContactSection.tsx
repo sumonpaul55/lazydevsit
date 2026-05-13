@@ -138,7 +138,7 @@ export default function ContactSection() {
   };
 
   return (
-    <div ref={container} className="contact-section max-w-7xl mx-auto py-32">
+    <div ref={container} className="contact-section max-w-7xl mx-auto py-32 px-4">
       <div className="section-heading text-center mb-16">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tighter mb-4">
           Ready to Transform Your Digital Presence?
