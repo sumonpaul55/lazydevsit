@@ -91,16 +91,16 @@ export default function FeaturedProject() {
         </div>
 
         {/* Embla Carousel */}
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-7xl mx-auto">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-6 md:gap-1">
+            <div className="flex gap-6 md:gap-1 mb-5">
               {projects.map((project, index) => (
                 <div
                   key={project.id}
                   ref={(el) => {
                     if (el) slidesRef.current[index] = el;
                   }}
-                  className="flex-[1_0_88%] md:flex-[1_0_48%] lg:flex-[1_0_380px] min-w-0 transition-all duration-300 p-2 border rounded-sm bg-primary border-zinc-900 overflow-hidden shadow-2xl h-full flex flex-col"
+                  className="flex-[1_0_88%] md:flex-[1_0_48%] lg:flex-[1_0_440px] min-w-0 transition-all duration-300 p-2 border rounded-sm bg-primary border-zinc-900 overflow-hidden h-full flex flex-col"
                 >
                   <div className="group bg-linear-to-br from-[#160931] via-[#0b021b] to-[#110726]  rounded-xl overflow-hidden h-full flex flex-col ">
                     {/* Image Container */}
