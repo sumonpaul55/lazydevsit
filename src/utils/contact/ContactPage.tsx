@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, } from "react";
-import { contactMethods } from "../utils/contact/ContactData";
+import React, { useState } from "react";
+import { contactMethods } from "./ContactData";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ export default function ContactPage() {
     message: "",
   });
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     console.log(name);
@@ -20,8 +20,6 @@ export default function ContactPage() {
     e.preventDefault();
     console.log("Form Values:", formData);
   };
-
-
 
   return (
     <div className="min-h-screen  text-white">
@@ -49,7 +47,7 @@ export default function ContactPage() {
         </div>
       </header>
       {/* Contact Info Column */}
-      <section className="space-y-12 flex lg:flex-row flex-col md:gap-18 my-20 px-5 xl:px-0">
+      <section className="bg-black space-y-12 flex lg:flex-row flex-col md:gap-18 my-20 px-5 xl:px-0">
         <div className="flex-[30%]">
           <h2 className="text-3xl sm:text-5xl font-bold mb-6">Get in touch</h2>
           <p className="text-gray-400 text-lg sm:text-xl">
@@ -68,7 +66,9 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-2xl sm:text-3xl font-bold">{method.title}</h3>
+                  <h3 className="text-2xl sm:text-3xl font-bold">
+                    {method.title}
+                  </h3>
                   <p className="text-gray-400 text-lg sm:text-xl leading-relaxed">
                     {method.desc}
                   </p>
@@ -86,7 +86,9 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
               name="name"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(e)
+              }
               type="text"
               placeholder="Full Name"
               className="w-full bg-white text-black px-5 py-4 rounded-sm focus:ring-2 focus:ring-purple-500 outline-none transition-all"
@@ -94,7 +96,9 @@ export default function ContactPage() {
             />
             <input
               name="email"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(e)
+              }
               type="email"
               placeholder="Your Email"
               className="w-full bg-white text-black px-5 py-4 rounded-sm focus:ring-2 focus:ring-purple-500 outline-none transition-all"
