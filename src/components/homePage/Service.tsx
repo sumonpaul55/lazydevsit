@@ -32,7 +32,7 @@ export default function Service() {
     // Add your navigation logic (next.js router, etc.)
   };
   return (
-    <section ref={sectionRef} className="py-24 px-6 bg-primary text-white">
+    <section ref={sectionRef} className="py-24 px-6 text-white">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
