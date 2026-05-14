@@ -128,24 +128,25 @@ export default function ProcessWeFollow() {
       {/* Cards wrapper — gets pinned while cards stack */}
       <div
         ref={cardsWrapperRef}
-        className="relative flex justify-center px-6 pb-24"
+        className="relative flex justify-center"
         style={{ minHeight: "100vh" }}
       >
-        <div className="relative w-full max-w-7xl">
+        <div className="relative w-full max-w-4xl">
           {processSteps.map((step, index) => (
             <div
               key={index}
               ref={(el) => {
                 if (el) cardRefs.current[index] = el;
               }}
-              className="absolute top-0 left-0 w-full rounded-3xl shadow-2xl overflow-hidden"
+              className="absolute top-0 left-0 w-full rounded-3xl shadow-2xl overflow-hidden leading-none"
               style={{
                 backgroundColor: step.bgColor,
                 zIndex: index + 1,
                 transformOrigin: "top center",
               }}
             >
-              <div className="p-8 md:p-12">
+              <div className="p-8 md:p-12 pb-0">
+                {/* Reduced bottom padding */}
                 <div className="flex items-start gap-8">
                   {/* Number */}
                   <div className="shrink-0">
@@ -160,7 +161,7 @@ export default function ProcessWeFollow() {
                   </div>
 
                   {/* Content */}
-                  <div>
+                  <div className="flex-1">
                     <h3 className="text-3xl font-semibold leading-tight text-white mb-6">
                       {step.title}
                     </h3>
@@ -171,8 +172,10 @@ export default function ProcessWeFollow() {
                 </div>
               </div>
 
-              {/* Bottom liner Bar */}
-              <div className={`h-1.5 bg-linear-to-r ${step.color} w-full`} />
+              {/* Bottom Bar - Tightly attached */}
+              <div
+                className={`h-1.5 bg-linear-to-r ${step.color} w-full mt-0`}
+              />
             </div>
           ))}
         </div>
