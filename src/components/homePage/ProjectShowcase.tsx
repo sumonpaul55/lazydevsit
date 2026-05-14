@@ -2,7 +2,7 @@ import { projectShowcaseData } from "../../utils/home/projectShowcaseData";
 
 export default function ProjectShowcase() {
   return (
-    <div className="min-h-screen bg-zinc-950 py-16">
+    <div className="min-h-screen py-16">
       {/* Two Row Infinite Ticker */}
       <div className="space-y-8 mb-20">
         {/* Row 1 - Scroll Left */}
