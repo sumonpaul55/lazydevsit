@@ -63,7 +63,7 @@ export default function ProjectShowcase() {
                         <div className="w-3 h-3 bg-green-500 rounded-full" />
                       </div>
                     </div>
-                    <div className="overflow-hidden aspect-[16/10]">
+                    <div className="overflow-hidden aspect-16/10">
                       <img
                         src={project.image}
                         alt={project.title}

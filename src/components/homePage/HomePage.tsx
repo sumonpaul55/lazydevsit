@@ -1,3 +1,4 @@
+import ClientReviews from "./ClientReviews";
 import FeaturedProject from "./FeaturedProject";
 import ProcessWeFollow from "./ProcessWeFollow";
 import ProjectShowcase from "./ProjectShowcase";
@@ -7,11 +8,12 @@ import WhyPartner from "./WhyPartner";
 export default function HomePage() {
   return (
     <div className="bg-primary">
-      <ProjectShowcase/>
+      <ProjectShowcase />
       <Service />
       <ProcessWeFollow />
       <WhyPartner />
       <FeaturedProject />
+      <ClientReviews />
     </div>
   );
 }
