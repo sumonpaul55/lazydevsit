@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { services } from "../../utils/home/service";
 import gsap from "gsap";
+import { FaChartLine, FaCode, FaPalette } from "react-icons/fa";
 
 export default function Service() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -8,18 +9,69 @@ export default function Service() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      cardsRef.current.forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            y: 80,
+            scale: 0.95,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out",
+            delay: index * 0.1,
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              end: "top 30%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+      });
+
+      // Header Animation
       gsap.fromTo(
-        cardsRef.current,
+        ".service-header",
         {
           opacity: 0,
-          y: 80,
+          y: 50,
         },
         {
           opacity: 1,
           y: 0,
-          duration: 0.9,
-          stagger: 0.15,
+          duration: 1,
           ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
+
+      // Tags Animation
+      gsap.fromTo(
+        ".service-tag",
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".service-tags-wrapper",
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
         },
       );
     }, sectionRef);
@@ -29,7 +81,6 @@ export default function Service() {
 
   const handleExplore = (title: string) => {
     console.log(`Navigating to ${title}`);
-    // Add your navigation logic (next.js router, etc.)
   };
   return (
     <section ref={sectionRef} className="py-24 px-6 text-white">
@@ -49,9 +100,9 @@ export default function Service() {
           {/* Filter Tags */}
           <div className="flex flex-wrap justify-center gap-4 mt-12">
             {[
-              { label: "Conversion Friendly UI/UX", icon: "fa-palette" },
-              { label: "Interactive Web Solution", icon: "fa-code" },
-              { label: "Unified Online Visibility", icon: "fa-chart-line" },
+              { label: "Conversion Friendly UI/UX", icon: <FaPalette /> },
+              { label: "Interactive Web Solution", icon: <FaCode /> },
+              { label: "Unified Online Visibility", icon: <FaChartLine /> },
             ].map((tag, i) => (
               <div
                 key={i}
@@ -59,7 +110,7 @@ export default function Service() {
                            hover:border-white/30 rounded-3xl text-sm font-medium flex items-center gap-3 
                            transition-all duration-300 cursor-pointer active:scale-95"
               >
-                <i className={`fa-solid ${tag.icon} text-yellow-400`}></i>
+                <i className={"fa-solid text-yellow-400"}>{tag.icon}</i>
                 <span>{tag.label}</span>
               </div>
             ))}

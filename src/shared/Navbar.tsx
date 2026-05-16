@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Link } from "react-router";
 import { navLinks } from "../utils/navbar/navbarItem";
@@ -23,14 +24,14 @@ export default function Navbar() {
       tl.current = gsap.fromTo(
         menuRef.current,
         {
-          y: -30, // Start slightly above
-          opacity: 0.95, // Very subtle opacity for smoothness (optional)
+          y: -30,
+          opacity: 0.95,
         },
         {
           y: 0,
           opacity: 1,
           duration: 0.5,
-          ease: "power3.out", // Very smooth natural dropdown feel
+          ease: "power3.out",
         },
       );
     } else {
@@ -85,11 +86,10 @@ export default function Navbar() {
               {link.navName === "Services" && isServicesOpen && (
                 <div
                   ref={menuRef}
-                  className={`absolute left-1/2 -translate-x-1/2 top-full pt-4 w-275 hidden md:block transition-opacity ${
-                    isServicesOpen
+                  className={`absolute left-1/2 -translate-x-1/2 top-full pt-4 w-275 hidden md:block transition-opacity ${isServicesOpen
                       ? "pointer-events-auto"
                       : "pointer-events-none"
-                  }`}
+                    }`}
                   style={{ opacity: 0, transform: "translateY(-40px)" }}
                 >
                   <div className="bg-white text-black rounded-3xl shadow-2xl overflow-hidden">
@@ -148,9 +148,8 @@ export default function Navbar() {
 
       {/* ==================== MOBILE MENU ==================== */}
       <div
-        className={`fixed inset-0 z-50 transform transition-transform duration-300 md:hidden ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed inset-0 z-50 transform transition-transform duration-300 md:hidden ${isOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="bg-[#120a1c] w-full max-w-sm h-full p-6 shadow-2xl overflow-y-auto">
           <div className="flex justify-between items-center mb-10">
