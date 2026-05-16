@@ -7,17 +7,33 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
   globalIgnores(['dist']),
+
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
+      ...tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
+
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+    },
+
+    rules: {
+      // disable completely
+      '@typescript-eslint/no-unused-vars': 'off',
+
+      // OR ignore variables starting with _
+      // '@typescript-eslint/no-unused-vars': [
+      //   'warn',
+      //   {
+      //     argsIgnorePattern: '^_',
+      //     varsIgnorePattern: '^_',
+      //   },
+      // ],
     },
   },
 ])
