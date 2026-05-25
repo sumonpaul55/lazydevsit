@@ -26,7 +26,7 @@ export default function FeaturedProject() {
 
     emblaApi.slideNodes().forEach((slide, index) => {
       const slideProgress = (scrollProgress - scrollSnaps[index]) * -1;
-      const absProgress = Math.min(Math.abs(slideProgress), 1);
+      // const absProgress = Math.min(Math.abs(slideProgress), 1);
 
       let rotateY = 0;
       let scale = 1;

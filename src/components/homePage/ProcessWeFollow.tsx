@@ -63,7 +63,7 @@ export default function ProcessWeFollow() {
       let cumulativeTop = 0;
       const initialTops: number[] = [];
 
-      cards.forEach((card, i) => {
+      cards.forEach((card,) => {
         initialTops.push(cumulativeTop);
         gsap.set(card, { y: cumulativeTop, scale: 1 });
         cumulativeTop += card.offsetHeight + CARD_GAP;
