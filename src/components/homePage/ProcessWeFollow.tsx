@@ -59,41 +59,73 @@ export default function ProcessWeFollow() {
     const PEEK = 40;
 
     const ctx = gsap.context(() => {
-      // ── Step 1: lay cards out top-to-bottom with gaps (absolute positioning) ──
-      let cumulativeTop = 0;
       const initialTops: number[] = [];
 
-      cards.forEach((card,) => {
-        initialTops.push(cumulativeTop);
-        gsap.set(card, { y: cumulativeTop, scale: 1 });
-        cumulativeTop += card.offsetHeight + CARD_GAP;
-      });
+      const recalculateHeights = () => {
+        // Reset card heights to auto first to calculate natural height
+        cards.forEach((card) => {
+          card.style.height = "auto";
+        });
 
-      // Give the wrapper its natural height so the page scrolls correctly
-      cardsWrapperRef.current!.style.height = `${cumulativeTop - CARD_GAP}px`;
+        // Find the maximum height among all cards
+        let maxHeight = 0;
+        cards.forEach((card) => {
+          maxHeight = Math.max(maxHeight, card.offsetHeight);
+        });
+
+        // Set all cards to this maximum height so they overlap perfectly
+        cards.forEach((card) => {
+          card.style.height = `${maxHeight}px`;
+        });
+
+        // Lay cards out top-to-bottom with gaps
+        let cumulativeTop = 0;
+        initialTops.length = 0; // Clear the array
+        cards.forEach((card) => {
+          initialTops.push(cumulativeTop);
+          gsap.set(card, { y: cumulativeTop, scale: 1 });
+          cumulativeTop += maxHeight + CARD_GAP;
+        });
+
+        // Give the wrapper its natural height so the page scrolls correctly
+        if (cardsWrapperRef.current) {
+          cardsWrapperRef.current.style.height = `${cumulativeTop - CARD_GAP}px`;
+        }
+      };
+
+      // Run initially
+      recalculateHeights();
+
+      // Recalculate and re-layout on ScrollTrigger refresh (e.g. resize)
+      ScrollTrigger.addEventListener("refreshInit", recalculateHeights);
 
       // ── Step 2: for each card (after the first) animate it up over the previous ──
       cards.forEach((card, i) => {
         if (i === 0) return;
 
         const prevCard = cards[i - 1];
-        const prevTop = initialTops[i - 1];
-
-        // Final resting position of card i: PEEK px below card (i-1)'s top
-        const targetTop = prevTop + PEEK;
-        const travelDistance = initialTops[i] - targetTop;
 
         // Animate card i upward while pinning card i-1
         ScrollTrigger.create({
           trigger: prevCard,
           start: "top top",
-          end: `+=${travelDistance}`,
+          end: () => {
+            const prevTop = initialTops[i - 1];
+            const targetTop = prevTop + PEEK;
+            const travelDistance = initialTops[i] - targetTop;
+            return `+=${travelDistance}`;
+          },
           pin: true,
           pinSpacing: false, // wrapper height already accounts for the scroll space
           anticipatePin: 1,
           scrub: 1,
+          invalidateOnRefresh: true,
           onUpdate: (self) => {
             const p = self.progress;
+            const prevTop = initialTops[i - 1];
+            const targetTop = prevTop + PEEK;
+            const travelDistance = initialTops[i] - targetTop;
+
             // Slide card i up into place
             gsap.set(card, { y: initialTops[i] - travelDistance * p });
             // Subtly push previous card back for depth
@@ -103,7 +135,9 @@ export default function ProcessWeFollow() {
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (

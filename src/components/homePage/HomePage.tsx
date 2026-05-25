@@ -1,3 +1,4 @@
+import ContactSection from "../contact/ContactSection";
 import Banner from "./Banner";
 import ClientReviews from "./ClientReviews";
 import FeaturedProject from "./FeaturedProject";
@@ -16,6 +17,9 @@ export default function HomePage() {
       <WhyPartner />
       <FeaturedProject />
       <ClientReviews />
+      <div className="text-white">
+        <ContactSection />
+      </div>
     </div>
   );
 }
