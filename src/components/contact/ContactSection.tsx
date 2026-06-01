@@ -5,12 +5,26 @@ import { FiLinkedin } from "react-icons/fi";
 import { PiFacebookLogoBold } from "react-icons/pi";
 import { BsInstagram } from "react-icons/bs";
 import { Link } from "react-router";
+import api from "../../utils/api";
+import Swal from "sweetalert2";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "center",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  },
+});
 
 export default function ContactSection() {
   const container = useRef<HTMLDivElement>(null);
@@ -129,12 +143,21 @@ export default function ContactSection() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-    alert("Message sent successfully! 🎉");
+    try {
+      const response = await api.post("/contact", formData);
 
-    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    setIsSubmitting(false);
+      if (response.data?.success) {
+        Toast.fire({ icon: "success", title: "Message sent successfully! 🎉" });
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      } else {
+        throw new Error(response.data?.message || "Something went wrong!");
+      }
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.message || err.message || "Failed to send message. Please try again.";
+      Toast.fire({ icon: "error", title: errorMessage });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -311,6 +334,7 @@ export default function ContactSection() {
           </form>
         </div>
       </div>
+
     </div>
   );
 }
