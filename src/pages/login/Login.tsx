@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FiMail, FiUser, FiArrowLeft, FiLoader, FiCheckCircle } from "react-icons/fi";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +37,15 @@ export default function Login() {
     setTimeout(() => {
       setIsLoading(false);
       setIsSuccess(true);
+
+      // Save session credentials
+      localStorage.setItem("user", JSON.stringify({ name, email, role: "ADMIN" }));
+      localStorage.setItem("token", "mock-jwt-token-12345");
+
+      // Redirect after showing checkmark animation
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
     }, 1500);
   };
 
@@ -43,17 +53,17 @@ export default function Login() {
     <div className="min-h-screen bg-[#080018] text-white relative flex items-center justify-center p-4 overflow-hidden font-sans select-none">
       {/* Decorative Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-50"></div>
-      
+
       {/* Dynamic Ambient Glowing Orbs */}
       <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-700/15 rounded-full blur-[120px] pointer-events-none animate-pulse duration-[8000ms]"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-700/15 rounded-full blur-[120px] pointer-events-none animate-pulse duration-[10000ms]"></div>
 
       {/* Login Container */}
       <div className="relative z-10 w-full max-w-md">
-        
+
         {/* Go Back Home */}
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-6 group transition-colors duration-200"
         >
           <FiArrowLeft className="group-hover:-translate-x-1 transition-transform duration-200" />
@@ -79,8 +89,8 @@ export default function Login() {
               {isSuccess ? "Welcome Back!" : "Access Your Space"}
             </h2>
             <p className="text-gray-400 text-sm mt-2 text-center max-w-[280px]">
-              {isSuccess 
-                ? "You have successfully signed in to your portal." 
+              {isSuccess
+                ? "You have successfully signed in to your portal."
                 : "Enter your name and email address to continue."}
             </p>
           </div>
@@ -94,8 +104,8 @@ export default function Login() {
               <p className="text-sm text-gray-400 mb-6 max-w-xs">
                 Welcome, <span className="text-purple-300 font-semibold">{name}</span>! You are successfully authenticated.
               </p>
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className="w-full py-3.5 bg-purple-600 hover:bg-purple-500 active:scale-[0.98] text-white rounded-xl font-semibold shadow-lg shadow-purple-600/30 transition-all duration-300 text-center flex items-center justify-center"
               >
                 Go to Dashboard
@@ -103,7 +113,7 @@ export default function Login() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-              
+
               {/* Name Input */}
               <div className="space-y-2">
                 <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-wider text-purple-300/80">
@@ -119,9 +129,8 @@ export default function Login() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="John Doe"
-                    className={`w-full bg-white/5 border ${
-                      errors.name ? "border-rose-500/50 focus:border-rose-500 focus:ring-rose-500/10" : "border-white/10 focus:border-purple-500 focus:ring-purple-500/15"
-                    } rounded-xl py-3.5 pl-11 pr-4 text-white placeholder-white/20 focus:outline-none focus:ring-4 transition-all duration-300 text-sm`}
+                    className={`w-full bg-white/5 border ${errors.name ? "border-rose-500/50 focus:border-rose-500 focus:ring-rose-500/10" : "border-white/10 focus:border-purple-500 focus:ring-purple-500/15"
+                      } rounded-xl py-3.5 pl-11 pr-4 text-white placeholder-white/20 focus:outline-none focus:ring-4 transition-all duration-300 text-sm`}
                   />
                 </div>
                 {errors.name && (
@@ -144,9 +153,8 @@ export default function Login() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className={`w-full bg-white/5 border ${
-                      errors.email ? "border-rose-500/50 focus:border-rose-500 focus:ring-rose-500/10" : "border-white/10 focus:border-purple-500 focus:ring-purple-500/15"
-                    } rounded-xl py-3.5 pl-11 pr-4 text-white placeholder-white/20 focus:outline-none focus:ring-4 transition-all duration-300 text-sm`}
+                    className={`w-full bg-white/5 border ${errors.email ? "border-rose-500/50 focus:border-rose-500 focus:ring-rose-500/10" : "border-white/10 focus:border-purple-500 focus:ring-purple-500/15"
+                      } rounded-xl py-3.5 pl-11 pr-4 text-white placeholder-white/20 focus:outline-none focus:ring-4 transition-all duration-300 text-sm`}
                   />
                 </div>
                 {errors.email && (
