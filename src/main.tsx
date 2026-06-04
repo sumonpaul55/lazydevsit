@@ -6,6 +6,7 @@ import { MainLayout } from "./layouts/MainLayout";
 import AboutUs from "./pages/about/Aboutus";
 import { Contact } from "./pages/contact/Contact";
 import HomePage from "./components/homePage/HomePage";
+import Login from "./pages/login/Login";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<AboutUs />} />
         </Route>
+        <Route path="login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
